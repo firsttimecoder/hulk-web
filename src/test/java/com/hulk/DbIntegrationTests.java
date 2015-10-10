@@ -7,6 +7,7 @@ import com.hulk.data.repository.CallInfoRepository;
 import com.hulk.data.repository.CallStatusChangeRepository;
 import com.hulk.data.repository.EntityRepository;
 import com.hulk.enums.*;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.Date;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = HulkApplication.class)
 @WebAppConfiguration
+@Ignore
 public class DbIntegrationTests {
 
     @Autowired
