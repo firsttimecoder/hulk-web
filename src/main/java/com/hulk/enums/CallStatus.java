@@ -5,6 +5,7 @@ package com.hulk.enums;
  */
 public enum CallStatus {
 
+    CREATED,
     COMPLETE,
 
     UNKNOWN

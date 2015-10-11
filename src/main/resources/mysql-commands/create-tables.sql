@@ -54,7 +54,6 @@ CREATE TABLE CallInfo (
 CREATE TABLE CallStatusChange (
     id BIGINT NOT NULL AUTO_INCREMENT,
     creationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    oldStatus CHAR(20),
     newStatus CHAR(20),
     changedByAgentId BIGINT NOT NULL,
     callInfoId BIGINT NOT NULL,

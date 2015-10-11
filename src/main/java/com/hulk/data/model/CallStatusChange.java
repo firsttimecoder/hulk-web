@@ -22,10 +22,6 @@ public class CallStatusChange extends BaseHibernateEntity {
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private CallStatus oldStatus;
-
-    @Column
-    @Enumerated(value = EnumType.STRING)
     private CallStatus newStatus;
 
     @OneToOne(optional = false, fetch = FetchType.EAGER)

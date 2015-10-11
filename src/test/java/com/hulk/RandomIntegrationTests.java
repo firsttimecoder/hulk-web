@@ -7,15 +7,18 @@ import com.hulk.data.repository.CallInfoRepository;
 import com.hulk.data.repository.CallStatusChangeRepository;
 import com.hulk.data.repository.EntityRepository;
 import com.hulk.enums.*;
+import com.hulk.service.CallInfoService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by vijayvar on 10/10/15.
@@ -23,8 +26,8 @@ import java.util.Date;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = HulkApplication.class)
 @WebAppConfiguration
-@Ignore
-public class DbIntegrationTests {
+//@Ignore
+public class RandomIntegrationTests {
 
     @Autowired
     private AgentRepository agentRepository;
@@ -38,7 +41,10 @@ public class DbIntegrationTests {
     @Autowired
     private CallStatusChangeRepository callStatusChangeRepository;
 
-    //@Test
+    @Autowired
+    private CallInfoService callInfoService;
+
+//    @Test
     public void test1() {
         Agent a = new Agent();
         a.setId(1L);
@@ -59,13 +65,13 @@ public class DbIntegrationTests {
         agentRepository.save(a);
     }
 
-    //@Test
+//    @Test
     public void test2() {
         Agent a = agentRepository.findOne(1L);
         String b = "";
     }
 
-    //@Test
+//    @Test
     public void test3() {
         Entity e = new Entity();
         e.setName("dddddddd");
@@ -98,7 +104,7 @@ public class DbIntegrationTests {
         entityRepository.save(e);
     }
 
-    //@Test
+//    @Test
     public void test5() {
         CallInfo ci = new CallInfo();
 
@@ -132,7 +138,7 @@ public class DbIntegrationTests {
         callInfoRepository.save(ci);
     }
 
-    //@Test
+//    @Test
     public void test7() {
         CallStatusChange c = new CallStatusChange();
 
@@ -145,7 +151,6 @@ public class DbIntegrationTests {
         c.setChangedByAgent(a);
 
         c.setNewStatus(CallStatus.COMPLETE);
-        c.setOldStatus(CallStatus.UNKNOWN);
 
         callStatusChangeRepository.save(c);
     }
@@ -160,5 +165,44 @@ public class DbIntegrationTests {
     public void test9() {
         CallStatusChange c = callStatusChangeRepository.findOne(3L);
         String a = "";
+    }
+
+//    @Test
+    public void test10() {
+        List<CallStatusChange> a = callStatusChangeRepository.findByCallInfoId(2L, new Sort(Sort.Direction.ASC, "creationTime"));
+        String b = "";
+    }
+
+//    @Test
+    public void test11() {
+        callInfoService.assignCallToAgent(3L, 2L);
+    }
+
+//    @Test
+    public void test12() {
+        Agent agent = new Agent();
+        agent.setId(1L);
+
+        CallInfo callInfo = new CallInfo();
+        callInfo.setId(2L);
+
+        CallStatusChange callStatusChange = new CallStatusChange();
+        callStatusChange.setNewStatus(CallStatus.CREATED);
+        callStatusChange.setChangedByAgent(agent);
+        callStatusChange.setCallInfo(callInfo);
+
+        callInfoService.changeCallStatus(callStatusChange);
+    }
+
+//    @Test
+    public void test13() {
+        List<CallStatusChange> a = callInfoService.getAllCallStatusChanges(2L);
+        String b = "";
+    }
+
+//    @Test
+    public void test14() {
+        List<CallInfo> a = callInfoRepository.findByAssignedAgentId(2L);
+        String b = "";
     }
 }
