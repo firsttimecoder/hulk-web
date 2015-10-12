@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -18,8 +18,7 @@ import java.util.Set;
 public class Agent extends BaseHibernateEntity {
 
     @Column(insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationTime;
+    private LocalDateTime creationTime;
 
     @Column
     private String email;
@@ -35,8 +34,7 @@ public class Agent extends BaseHibernateEntity {
     private AgentRole role;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     @Column(nullable = false)
     private String firstName;

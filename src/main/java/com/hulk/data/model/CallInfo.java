@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -18,15 +18,13 @@ import java.util.Set;
 public class CallInfo extends BaseHibernateEntity {
 
     @Column(insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationTime;
+    private LocalDateTime creationTime;
 
     @Column(nullable = false)
     private String customerName;
 
     @Column(insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUpdatedTime;
+    private LocalDateTime lastUpdatedTime;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)

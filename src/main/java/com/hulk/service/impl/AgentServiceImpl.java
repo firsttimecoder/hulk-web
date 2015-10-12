@@ -36,6 +36,6 @@ public class AgentServiceImpl implements AgentService{
 
     @Override
     public List<CallInfo> getAllAssignedCalls(Long agentId) {
-        callInfoRepository.findByAssignedAgentId(agentId);
+        return callInfoRepository.findByAssignedAgentId(agentId);
     }
 }

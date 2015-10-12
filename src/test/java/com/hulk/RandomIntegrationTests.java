@@ -8,6 +8,7 @@ import com.hulk.data.repository.CallStatusChangeRepository;
 import com.hulk.data.repository.EntityRepository;
 import com.hulk.enums.*;
 import com.hulk.service.CallInfoService;
+import org.hibernate.Version;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class RandomIntegrationTests {
     public void test1() {
         Agent a = new Agent();
         a.setId(1L);
-        a.setDateOfBirth(new Date());
+        a.setDateOfBirth(LocalDateTime.now());
         a.setFirstName("ffddd");
         a.setHashedPassword("dafda");
         a.setLastName("la");
@@ -204,5 +206,22 @@ public class RandomIntegrationTests {
     public void test14() {
         List<CallInfo> a = callInfoRepository.findByAssignedAgentId(2L);
         String b = "";
+    }
+
+//    @Test
+    public void test15() {
+        LocalDateTime a = LocalDateTime.now();
+        String c = Version.getVersionString();
+        String b = "";
+    }
+
+//    @Test
+    public void test16() {
+        Agent a = agentRepository.findOne(1L);
+        Agent b = agentRepository.findOne(2L);
+
+        CallInfo c = callInfoRepository.findOne(2L);
+
+        String d = "";
     }
 }

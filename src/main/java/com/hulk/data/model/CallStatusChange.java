@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by vijayvar on 10/10/15.
@@ -17,8 +17,7 @@ import java.util.Date;
 public class CallStatusChange extends BaseHibernateEntity {
 
     @Column(insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationTime;
+    private LocalDateTime creationTime;
 
     @Column
     @Enumerated(value = EnumType.STRING)
