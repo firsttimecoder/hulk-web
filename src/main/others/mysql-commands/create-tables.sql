@@ -42,6 +42,7 @@ CREATE TABLE CallInfo (
     lastUpdatedTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     currentStatus CHAR(40) NOT NULL,
     assignedEntityId BIGINT NOT NULL,
+    ownerEntityId BIGINT NOT NULL,
     assignedAgentId BIGINT,
     lastStatusChangeId BIGINT,
     priority TINYINT DEFAULT -1,

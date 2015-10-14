@@ -34,6 +34,10 @@ public class CallInfo extends BaseHibernateEntity {
     @JoinColumn(name = "assignedEntityId")
     private Entity assignedEntity;
 
+    @OneToOne(optional = false)
+    @JoinColumn(name = "ownerEntityId")
+    private Entity ownerEntity;
+
     @OneToOne
     @JoinColumn(name = "assignedAgentId")
     private Agent assignedAgent;
