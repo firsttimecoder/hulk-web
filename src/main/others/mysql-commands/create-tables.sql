@@ -25,7 +25,7 @@ CREATE TABLE Agent (
     creationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(100),
     loginId CHAR(15) NOT NULL,
-    hashedPassword VARCHAR(50) NOT NULL,
+    hashedPassword VARCHAR(80) NOT NULL,
     role CHAR(40),
     dateOfBirth TIMESTAMP NOT NULL,
     firstName VARCHAR(25) NOT NULL,

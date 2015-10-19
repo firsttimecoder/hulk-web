@@ -2,6 +2,7 @@ package com.hulk.service.impl;
 
 import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
+import com.hulk.data.pojo.CreateAgentDTO;
 import com.hulk.data.repository.AgentRepository;
 import com.hulk.data.repository.CallInfoRepository;
 import com.hulk.service.AgentService;
@@ -25,8 +26,13 @@ public class AgentServiceImpl implements AgentService{
     private CallInfoRepository callInfoRepository;
 
     @Override
-    public void createOrUpdateAgent(Agent agent) {
-        agentRepository.save(agent);
+    public Agent createOrUpdateAgent(CreateAgentDTO createAgentDTO) {
+        Agent agent = Agent.from(createAgentDTO);
+
+        Agent savedAgent = agentRepository.save(agent);
+        savedAgent.setHashedPassword(null);
+
+        return savedAgent;
     }
 
     @Override

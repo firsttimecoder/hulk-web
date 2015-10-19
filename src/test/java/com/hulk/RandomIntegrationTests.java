@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -212,6 +213,12 @@ public class RandomIntegrationTests {
     public void test15() {
         LocalDateTime a = LocalDateTime.now();
         String c = Version.getVersionString();
+        String d = a.toString();
+
+        String e = "password";
+        String f = new BCryptPasswordEncoder().encode(e);
+        int g = f.length();
+
         String b = "";
     }
 
@@ -223,5 +230,11 @@ public class RandomIntegrationTests {
         CallInfo c = callInfoRepository.findOne(2L);
 
         String d = "";
+    }
+
+//    @Test
+    public void test17() {
+        Agent a = agentRepository.findByLoginId("faadfa");
+        String b = "";
     }
 }
