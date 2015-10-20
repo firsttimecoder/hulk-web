@@ -1,6 +1,7 @@
 package com.hulk.data.pojo;
 
 import com.hulk.data.model.Agent;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +13,7 @@ import java.util.Collection;
  */
 public class CurrentUser extends User {
 
+    @Getter
     private Agent agent;
 
     public CurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
