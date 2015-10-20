@@ -50,10 +50,7 @@ public class Agent extends BaseHibernateEntity {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "EntityAgentMapping",
-            joinColumns = {@JoinColumn(name = "agentId")},
-            inverseJoinColumns = {@JoinColumn(name = "entityId")})
+    @ManyToMany(mappedBy = "agents")
     private Set<Entity> entities = Sets.newHashSet();
 
     public static Agent from(CreateAgentDTO createAgentDTO) {

@@ -28,10 +28,6 @@ public class CallInfoServiceImpl implements CallInfoService {
 
     @Override
     public Long createOrUpdateCall(CallInfo callInfo) {
-        if (callInfo.getCurrentStatus() == null) {
-            callInfo.setCurrentStatus(CallStatus.CREATED);
-        }
-
         CallInfo savedCallInfo = callInfoRepository.save(callInfo);
         return savedCallInfo.getId();
     }
@@ -47,11 +43,6 @@ public class CallInfoServiceImpl implements CallInfoService {
 
         callInfoRepository.setCallStatusChangeIdForId(savedCallStatusChange.getCallInfo().getId(),
                 savedCallStatusChange.getId());
-    }
-
-    @Override
-    public CallStatus getCurrentCallStatus(Long callInfoId) {
-        return callInfoRepository.getOne(callInfoId).getCurrentStatus();
     }
 
     @Override

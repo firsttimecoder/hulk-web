@@ -34,7 +34,7 @@ public class Entity extends BaseHibernateEntity {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "EntityAgentMapping",
             joinColumns = {@JoinColumn(name = "entityId")},
             inverseJoinColumns = {@JoinColumn(name = "agentId")})

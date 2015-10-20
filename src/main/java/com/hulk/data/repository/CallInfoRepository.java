@@ -22,5 +22,6 @@ public interface CallInfoRepository extends JpaRepository<CallInfo, Long> {
     @Query("UPDATE CallInfo SET lastStatusChangeId = ?2 WHERE id = ?1")
     void setCallStatusChangeIdForId(Long callInfoId, Long callStatusChangeId);
 
-    List<CallInfo> findByAssignedAgentId(Long assignedAgentId);
+    List<CallInfo> findByAssignedAgentIdAndLastStatusChangeNullOrLastStatusChangeNewStatusNot(
+            Long assignedAgentId, CallStatus currentStatus);
 }

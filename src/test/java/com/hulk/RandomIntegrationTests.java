@@ -126,7 +126,6 @@ public class RandomIntegrationTests {
         e.setId(2L);
         ci.setAssignedEntity(e);
 
-        ci.setCurrentStatus(CallStatus.UNKNOWN);
         ci.setCustomerName("customername22");
         ci.setPriority(2);
 
@@ -136,7 +135,6 @@ public class RandomIntegrationTests {
 //    @Test
     public void test6() {
         CallInfo ci = callInfoRepository.findOne(2L);
-        ci.setCurrentStatus(CallStatus.UNKNOWN);
 
         callInfoRepository.save(ci);
     }
@@ -205,7 +203,8 @@ public class RandomIntegrationTests {
 
 //    @Test
     public void test14() {
-        List<CallInfo> a = callInfoRepository.findByAssignedAgentId(2L);
+        List<CallInfo> a = callInfoRepository.findByAssignedAgentIdAndLastStatusChangeNullOrLastStatusChangeNewStatusNot(
+                3L, CallStatus.COMPLETE);
         String b = "";
     }
 
@@ -235,6 +234,14 @@ public class RandomIntegrationTests {
 //    @Test
     public void test17() {
         Agent a = agentRepository.findByLoginId("faadfa");
+        String b = "";
+    }
+
+//    @Test
+    public void test18() {
+        Agent a = agentRepository.findOne(1L);
+        Entity c = entityRepository.findOne(1L);
+
         String b = "";
     }
 }

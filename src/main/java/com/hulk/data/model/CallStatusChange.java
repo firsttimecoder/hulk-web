@@ -23,11 +23,11 @@ public class CallStatusChange extends BaseHibernateEntity {
     @Enumerated(value = EnumType.STRING)
     private CallStatus newStatus;
 
-    @OneToOne(optional = false, fetch = FetchType.EAGER)
+    @OneToOne(optional = false)
     @JoinColumn(name = "changedByAgentId")
     private Agent changedByAgent;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "callInfoId")
     private CallInfo callInfo;
 }

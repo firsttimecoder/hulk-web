@@ -17,7 +17,5 @@ public interface CallInfoService {
 
     void changeCallStatus(CallStatusChange callStatusChange);
 
-    CallStatus getCurrentCallStatus(Long callInfoId);
-
     List<CallStatusChange> getAllCallStatusChanges(Long callInfoId);
 }

@@ -5,6 +5,7 @@ import com.hulk.data.model.CallInfo;
 import com.hulk.data.pojo.CreateAgentDTO;
 import com.hulk.data.repository.AgentRepository;
 import com.hulk.data.repository.CallInfoRepository;
+import com.hulk.enums.CallStatus;
 import com.hulk.service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,8 @@ public class AgentServiceImpl implements AgentService{
 
     @Override
     public List<CallInfo> getAllAssignedCalls(Long agentId) {
-        return callInfoRepository.findByAssignedAgentId(agentId);
+        return callInfoRepository
+                .findByAssignedAgentIdAndLastStatusChangeNullOrLastStatusChangeNewStatusNot(
+                        agentId, CallStatus.COMPLETE);
     }
 }

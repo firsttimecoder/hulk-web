@@ -1,7 +1,6 @@
 package com.hulk.data.model;
 
 import com.google.common.collect.Sets;
-import com.hulk.enums.CallStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,10 +25,6 @@ public class CallInfo extends BaseHibernateEntity {
     @Column(insertable = false, updatable = false)
     private LocalDateTime lastUpdatedTime;
 
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private CallStatus currentStatus;
-
     @OneToOne(optional = false)
     @JoinColumn(name = "assignedEntityId")
     private Entity assignedEntity;
@@ -42,7 +37,7 @@ public class CallInfo extends BaseHibernateEntity {
     @JoinColumn(name = "assignedAgentId")
     private Agent assignedAgent;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lastStatusChangeId")
     private CallStatusChange lastStatusChange;
 
@@ -53,6 +48,6 @@ public class CallInfo extends BaseHibernateEntity {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToMany(mappedBy = "callInfo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "callInfo")
     private Set<CallStatusChange> callStatusChanges = Sets.newHashSet();
 }
