@@ -2,6 +2,7 @@ package com.hulk.controller.rest;
 
 import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
+import com.hulk.data.pojo.AgentDTO;
 import com.hulk.data.pojo.CallInfoDTO;
 import com.hulk.data.pojo.CreateAgentDTO;
 import com.hulk.service.AgentService;
@@ -35,5 +36,11 @@ public class AgentRestController {
         return callInfoList.stream()
                 .map(CallInfoDTO::from)
                 .collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/getMyDetails", method = RequestMethod.GET)
+    public @ResponseBody AgentDTO getMyDetails() {
+        Agent agent = Utils.getCurrentUser().getAgent();
+        return AgentDTO.from(agent);
     }
 }
