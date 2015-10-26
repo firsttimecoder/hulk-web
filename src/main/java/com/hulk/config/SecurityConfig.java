@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .rememberMe()
                     .and()
                 .authorizeRequests()
-                    .antMatchers("/agents/create", "/assets/**").permitAll()
+                    .antMatchers("/agent/create", "/assets/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .csrf().disable()

@@ -6,9 +6,11 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.hulk.enums.AgentRole;
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 /**
@@ -17,10 +19,12 @@ import java.time.LocalDateTime;
 @Data
 public class CreateAgentDTO {
 
+    @Email
     private String email;
 
     @NotNull
     @Length(min = 6, max = 15)
+    @Pattern(regexp = "[\\w]+")     // allowed characters: alphabets, digits and underscores.
     private String loginId;
 
     @NotNull

@@ -31,7 +31,7 @@ public class AgentServiceImpl implements AgentService{
         Agent agent = Agent.from(createAgentDTO);
 
         Agent savedAgent = agentRepository.save(agent);
-        savedAgent.setHashedPassword(null);
+        savedAgent.setHashedPassword("");
 
         return savedAgent;
     }

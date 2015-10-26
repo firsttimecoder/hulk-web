@@ -10,6 +10,7 @@ import com.hulk.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class AgentRestController {
     private AgentService agentService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public @ResponseBody Agent createAgent(@RequestBody CreateAgentDTO createAgentDTO) {
+    public @ResponseBody Agent createAgent(@RequestBody @Valid CreateAgentDTO createAgentDTO) {
         Agent agent = agentService.createOrUpdateAgent(createAgentDTO);
         return agent;
     }
