@@ -32,6 +32,7 @@ CREATE TABLE Agent (
     lastName VARCHAR(25),
     addressId BIGINT,
     PRIMARY KEY (id),
+    UNIQUE KEY uc_loginId (loginId),
     FOREIGN KEY (addressId) REFERENCES Address(id)
 );
 
