@@ -7,6 +7,7 @@ package com.hulk.enums;
  */
 public enum IndianCity {
 
-    CHANDIGARH,
-    BENGALURU
+    Chandigarh,
+    Bengaluru,
+    ;
 }

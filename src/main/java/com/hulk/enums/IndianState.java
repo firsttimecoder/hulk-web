@@ -5,7 +5,8 @@ package com.hulk.enums;
  */
 public enum IndianState {
 
-    HARYANA,
-    PUNJAB,
-    KARNATAKA
+    Haryana,
+    Punjab,
+    Karnataka,
+    ;
 }

@@ -5,9 +5,11 @@ import com.hulk.data.model.CallInfo;
 import com.hulk.data.pojo.CreateAgentDTO;
 import com.hulk.data.repository.AgentRepository;
 import com.hulk.data.repository.CallInfoRepository;
+import com.hulk.enums.AgentRole;
 import com.hulk.enums.CallStatus;
 import com.hulk.service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +29,7 @@ public class AgentServiceImpl implements AgentService{
     private CallInfoRepository callInfoRepository;
 
     @Override
-    public Agent createOrUpdateAgent(CreateAgentDTO createAgentDTO) {
+    public Agent createAgent(CreateAgentDTO createAgentDTO) {
         Agent agent = Agent.from(createAgentDTO);
 
         Agent savedAgent = agentRepository.save(agent);
@@ -46,5 +48,13 @@ public class AgentServiceImpl implements AgentService{
         return callInfoRepository
                 .findByAssignedAgentIdAndLastStatusChangeNullOrLastStatusChangeNewStatusNot(
                         agentId, CallStatus.COMPLETE);
+    }
+
+    @Override
+    public List<Agent> getAllTechniciansForEntity(Long entityId) {
+        // TODO: use entityId.
+
+        return agentRepository.findByRole(AgentRole.TECHNICIAN,
+                new Sort(Sort.Direction.ASC, "firstName", "lastName"));
     }
 }

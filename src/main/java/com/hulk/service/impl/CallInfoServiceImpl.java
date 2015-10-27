@@ -1,11 +1,13 @@
 package com.hulk.service.impl;
 
+import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
 import com.hulk.data.model.CallStatusChange;
+import com.hulk.data.model.Entity;
 import com.hulk.data.repository.CallInfoRepository;
 import com.hulk.data.repository.CallStatusChangeRepository;
-import com.hulk.enums.CallStatus;
 import com.hulk.service.CallInfoService;
+import com.hulk.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,17 @@ public class CallInfoServiceImpl implements CallInfoService {
     private CallStatusChangeRepository callStatusChangeRepository;
 
     @Override
-    public Long createOrUpdateCall(CallInfo callInfo) {
+    public Long createCall(CallInfo callInfo) {
+        Agent currentAgent = Utils.getCurrentUser().getAgent();
+        Entity currentEntity = currentAgent.getAnyEntity();
+
+        if (callInfo.getAssignedEntity() == null) {
+            callInfo.setAssignedEntity(currentEntity);
+        }
+        if (callInfo.getOwnerEntity() == null) {
+            callInfo.setOwnerEntity(currentEntity);
+        }
+
         CallInfo savedCallInfo = callInfoRepository.save(callInfo);
         return savedCallInfo.getId();
     }

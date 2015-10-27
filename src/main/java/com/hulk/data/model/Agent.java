@@ -53,6 +53,23 @@ public class Agent extends BaseHibernateEntity {
     @ManyToMany(mappedBy = "agents")
     private Set<Entity> entities = Sets.newHashSet();
 
+    @Transient
+    public Entity getAnyEntity() {
+        return entities.stream()
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
+
+    @Transient
+    public String getDisplayName() {
+        return StringUtils.join(firstName, lastName);
+    }
+
+    @Transient
+    public String getFullDisplayInfo() {
+        return String.format("%s (%s | %s)", getDisplayName(), loginId, address.getPhoneNumber());
+    }
+
     public static Agent from(CreateAgentDTO createAgentDTO) {
         if (!StringUtils.equals(createAgentDTO.getPlainTextPassword(),
                 createAgentDTO.getConfirmPlainTextPassword())) {

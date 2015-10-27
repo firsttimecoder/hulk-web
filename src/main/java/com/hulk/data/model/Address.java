@@ -26,6 +26,9 @@ public class Address extends BaseHibernateEntity {
     @Column
     private String secondLine;
 
+    @Column
+    private String landmark;
+
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private IndianCity city;

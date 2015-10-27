@@ -1,8 +1,8 @@
 package com.hulk.service;
 
-import com.hulk.data.pojo.CreateAgentDTO;
 import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
+import com.hulk.data.pojo.CreateAgentDTO;
 
 import java.util.List;
 
@@ -11,9 +11,11 @@ import java.util.List;
  */
 public interface AgentService {
 
-    Agent createOrUpdateAgent(CreateAgentDTO createAgentDTO);
+    Agent createAgent(CreateAgentDTO createAgentDTO);
 
     Agent get(Long agentId);
 
     List<CallInfo> getAllAssignedCalls(Long agentId);
+
+    List<Agent> getAllTechniciansForEntity(Long entityId);
 }

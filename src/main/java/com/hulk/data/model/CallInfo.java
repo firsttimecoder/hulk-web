@@ -1,8 +1,10 @@
 package com.hulk.data.model;
 
 import com.google.common.collect.Sets;
+import com.hulk.data.pojo.CreateCallInfoDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,9 +20,6 @@ public class CallInfo extends BaseHibernateEntity {
 
     @Column(insertable = false, updatable = false)
     private LocalDateTime creationTime;
-
-    @Column(nullable = false)
-    private String customerName;
 
     @Column(insertable = false, updatable = false)
     private LocalDateTime lastUpdatedTime;
@@ -41,13 +40,40 @@ public class CallInfo extends BaseHibernateEntity {
     @JoinColumn(name = "lastStatusChangeId")
     private CallStatusChange lastStatusChange;
 
-    @Column
-    private Integer priority;
+
+    @Column(nullable = false)
+    private String customerName;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "addressId")
     private Address address;
 
+
+    @Column(nullable = false)
+    private String productName;
+
+    @Column(nullable = false)
+    private String productDefect;
+
+    @Column
+    private Integer priority;
+
+
     @OneToMany(mappedBy = "callInfo")
     private Set<CallStatusChange> callStatusChanges = Sets.newHashSet();
+
+    public static CallInfo from(CreateCallInfoDTO createCallInfoDTO) {
+        CallInfo callInfo = new CallInfo();
+
+        BeanUtils.copyProperties(createCallInfoDTO, callInfo);
+        callInfo.setAddress(Address.from(createCallInfoDTO.getAddress()));
+
+        if (createCallInfoDTO.getAssignedAgentId() != null) {
+            Agent agent = new Agent();
+            agent.setId(createCallInfoDTO.getAssignedAgentId());
+            callInfo.setAssignedAgent(agent);
+        }
+
+        return callInfo;
+    }
 }

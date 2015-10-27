@@ -2,6 +2,44 @@
     <head>
         <title>Add Call | Repairbranch</title>
         <%@ include file="commonHeadIncludes.jsp" %>
+
+<script>
+$(document).ready(function(){
+
+$("#addCallDiv").find("#saveAnchor").click(function() {
+    var createCallInfoDTO = {
+        assignedAgentId:    $("#addCallDiv").find("#assignedTechnician").val(),
+        customerName:       $("#addCallDiv").find("#customerName").val(),
+        address: {
+            firstLine:      $("#addCallDiv").find("#addressFirstLine").val(),
+            secondLine:     $("#addCallDiv").find("#addressSecondLine").val(),
+            landmark:       $("#addCallDiv").find("#addressLandmark").val(),
+            city:           $("#addCallDiv").find("#city").val(),
+            state:          $("#addCallDiv").find("#state").val(),
+            pincode:        $("#addCallDiv").find("#pincode").val(),
+            phoneNumber:    $("#addCallDiv").find("#phoneNumber").val()
+        },
+        productName:        $("#addCallDiv").find("#productName").val(),
+        productDefect:        $("#addCallDiv").find("#productDefect").val()
+    };
+
+    $.ajax({
+        url: "/callManagement/createCall",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(createCallInfoDTO),
+        success: function(result) {
+            alert("Success! Please reload page to view latest details.");
+        },
+        error: function(xhr){
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+});
+
+});
+</script>
+
     </head>
     <body>
         <%@ include file="commonHeader.jsp" %>
@@ -33,12 +71,12 @@
                                             </a>
                                         </div>
                                     </li>
-                                    <div id="light" class="white_content">
+                                    <div class="white_content" id="light">
                                         <h3>Add call</h3>
-                                        <form class="form-horizontal" role="form">
+                                        <form class="form-horizontal" role="form" id="addCallDiv">
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="firstname"
+                                                    <input type="text" class="form-control" id="customerName"
                                                         placeholder="Customer Name">
                                                 </div>
                                                 <div class="col-sm-6 mrg5B">
@@ -48,54 +86,60 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="firstname"
+                                                    <input type="text" class="form-control" id="addressFirstLine"
                                                         placeholder="Address: First line">
                                                 </div>
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="phoneNumber"
+                                                    <input type="text" class="form-control" id="addressSecondLine"
                                                         placeholder="Address: Second line">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="firstname"
+                                                    <input type="text" class="form-control" id="addressLandmark"
                                                         placeholder="Address: Landmark">
                                                 </div>
                                                 <div class="col-sm-6 mrg5B">
-                                                    <select class="form-control">
-                                                        <option>City</option>
-                                                        <option>1</option>
+                                                    <select class="form-control" id="city">
+                                                        <option selected disabled>City</option>
+                                                        <c:forEach items="${indianCityValues}" var="city">
+                                                            <option value="${city}">${city}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="firstname"
+                                                    <input type="text" class="form-control" id="pincode"
                                                         placeholder="Address: Pincode">
                                                 </div>
                                                 <div class="col-sm-6 mrg5B">
-                                                    <select class="form-control">
-                                                        <option>State</option>
-                                                        <option>1</option>
+                                                    <select class="form-control" id="state">
+                                                        <option selected disabled>State</option>
+                                                        <c:forEach items="${indianStateValues}" var="state">
+                                                            <option value="${state}">${state}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="firstname"
+                                                    <input type="text" class="form-control" id="productName"
                                                         placeholder="Product: Name">
                                                 </div>
                                                 <div class="col-sm-6 mrg5B">
-                                                    <input type="text" class="form-control" id="firstname"
+                                                    <input type="text" class="form-control" id="productDefect"
                                                         placeholder="Product: Defect">
-                                                </div>                                            </div>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
-                                                    <select class="form-control">
-                                                        <option>Assigned Technician</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
+                                                    <select class="form-control" id="assignedTechnician">
+                                                        <option selected disabled>Assigned Technician</option>
+                                                        <c:forEach items="${technicians}" var="technician">
+                                                            <option value="${technician.id}">${technician.fullDisplayInfo}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-6 mrg5B">
@@ -103,12 +147,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-10">
-                                                    <a title="" class="btn medium primary-bg" href="#">
+                                                    <a title="" class="btn medium primary-bg" href="#" id="saveAnchor">
                                                     <span class="button-content">Save</span>
                                                     </a>
-                                                    <a title="" class="btn medium primary-bg" href="#">
+                                                    <!-- a title="" class="btn medium primary-bg" href="#">
                                                     <span class="button-content">Cancel</span>
-                                                    </a>
+                                                    </a -->
                                                 </div>
                                             </div>
                                         </form>

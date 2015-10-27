@@ -2,7 +2,6 @@ package com.hulk.service;
 
 import com.hulk.data.model.CallInfo;
 import com.hulk.data.model.CallStatusChange;
-import com.hulk.enums.CallStatus;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  */
 public interface CallInfoService {
 
-    Long createOrUpdateCall(CallInfo callInfo);
+    Long createCall(CallInfo callInfo);
 
     void assignCallToAgent(Long callInfoId, Long agentId);
 

@@ -9,7 +9,6 @@ import com.hulk.data.repository.EntityRepository;
 import com.hulk.enums.*;
 import com.hulk.service.CallInfoService;
 import org.hibernate.Version;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,7 +27,6 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = HulkApplication.class)
 @WebAppConfiguration
-//@Ignore
 public class RandomIntegrationTests {
 
     @Autowired
@@ -47,6 +44,11 @@ public class RandomIntegrationTests {
     @Autowired
     private CallInfoService callInfoService;
 
+    @Test
+    public void test() {
+
+    }
+
 //    @Test
     public void test1() {
         Agent a = new Agent();
@@ -59,10 +61,10 @@ public class RandomIntegrationTests {
         a.setRole(AgentRole.MANUFACTURER_EMPLOYEE);
 
         Address add = new Address();
-        add.setCity(IndianCity.BENGALURU);
+        add.setCity(IndianCity.Bengaluru);
         add.setFirstLine("dafddda");
         add.setPincode("333333");
-        add.setState(IndianState.HARYANA);
+        add.setState(IndianState.Haryana);
         a.setAddress(add);
 
         agentRepository.save(a);
@@ -83,10 +85,10 @@ public class RandomIntegrationTests {
         //e.setId(1L);
 
         Address add = new Address();
-        add.setCity(IndianCity.CHANDIGARH);
+        add.setCity(IndianCity.Chandigarh);
         add.setFirstLine("dafddda");
         add.setPincode("333333");
-        add.setState(IndianState.PUNJAB);
+        add.setState(IndianState.Punjab);
         //add.setId(4L);
         e.setAddress(add);
 
@@ -99,7 +101,7 @@ public class RandomIntegrationTests {
         e.setType(EntityType.MANUFACTURER);
 
         Agent a = agentRepository.findOne(1L);
-        a.getAddress().setState(IndianState.PUNJAB);
+        a.getAddress().setState(IndianState.Punjab);
 
         e.setAgents(Sets.newHashSet(a));
         //a.setEntities(Sets.newHashSet(e));
@@ -112,10 +114,10 @@ public class RandomIntegrationTests {
         CallInfo ci = new CallInfo();
 
         Address add = new Address();
-        add.setCity(IndianCity.CHANDIGARH);
+        add.setCity(IndianCity.Chandigarh);
         add.setFirstLine("bb");
         add.setPincode("332221");
-        add.setState(IndianState.PUNJAB);
+        add.setState(IndianState.Punjab);
         ci.setAddress(add);
 
         Agent a = new Agent();
@@ -241,6 +243,8 @@ public class RandomIntegrationTests {
     public void test18() {
         Agent a = agentRepository.findOne(1L);
         Entity c = entityRepository.findOne(1L);
+
+        List<Agent> agents = agentRepository.findByRole(AgentRole.TECHNICIAN, new Sort(Sort.Direction.ASC, "firstName", "lastName"));
 
         String b = "";
     }

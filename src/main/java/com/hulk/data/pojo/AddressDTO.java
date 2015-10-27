@@ -4,12 +4,9 @@ import com.hulk.enums.IndianCity;
 import com.hulk.enums.IndianState;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Created by vijayvar on 10/19/15.
@@ -19,10 +16,12 @@ public class AddressDTO {
 
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String firstLine;
 
     private String secondLine;
+
+    private String landmark;
 
     @NotNull
     private IndianCity city;
