@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .rememberMe()
                     .and()
                 .authorizeRequests()
-                    .antMatchers("/agent/create", "/assets/**").permitAll()
+                    .antMatchers("/agent/create", "/assets/**", "/mobileAppConfig/**").permitAll()
                     .antMatchers("/callManagement/**").hasAuthority(AgentRole.SERVICE_CENTRE_EMPLOYEE.name())
                     .anyRequest().authenticated()
                     .and()
