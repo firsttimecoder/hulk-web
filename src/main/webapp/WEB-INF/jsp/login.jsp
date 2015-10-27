@@ -34,7 +34,7 @@
                                         <div class="form-input col-md-10">
                                             <div class="form-input-icon">
                                                 <i class="glyph-icon icon-envelope-o ui-state-default"></i>
-                                                <input placeholder="Username" data-type="email" data-trigger="change" data-required="true" type="login_email" name="username" id="login_email" value="loginId1">
+                                                <input placeholder="Username" data-type="email" data-trigger="change" data-required="true" type="login_email" name="username" id="login_email">
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                         <div class="form-input col-md-10">
                                             <div class="form-input-icon">
                                                 <i class="glyph-icon icon-unlock-alt ui-state-default"></i>
-                                                <input placeholder="Password" data-trigger="keyup" data-rangelength="[3,25]" type="password" name="password" id="login_pass" value="password">
+                                                <input placeholder="Password" data-trigger="keyup" data-rangelength="[3,25]" type="password" name="password" id="login_pass">
                                             </div>
                                         </div>
                                     </div>
