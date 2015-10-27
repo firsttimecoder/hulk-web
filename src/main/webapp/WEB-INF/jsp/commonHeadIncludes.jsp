@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/themes/minified/fides/responsive.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/popup-style.css">
 <!-- Fides Admin JS -->
-<script type="text/javascript" src="/assets/js/minified/aui-production.min.js"></script>
 <script type="text/javascript" src="/assets/js/minified/core/raphael.min.js"></script>
 <script type="text/javascript" src="/assets/js/minified/widgets/charts-justgage.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/assets/js/minified/aui-production.min.js"></script>

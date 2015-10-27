@@ -2,6 +2,7 @@ CREATE TABLE Address (
     id BIGINT NOT NULL AUTO_INCREMENT,
     firstLine VARCHAR(100) NOT NULL,
     secondLine VARCHAR(100),
+    landmark VARCHAR(100),
     city VARCHAR(30) NOT NULL,
     state VARCHAR(30) NOT NULL,
     pincode CHAR(6) NOT NULL,
@@ -39,14 +40,19 @@ CREATE TABLE Agent (
 CREATE TABLE CallInfo (
     id BIGINT NOT NULL AUTO_INCREMENT,
     creationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    customerName VARCHAR(50) NOT NULL,
     lastUpdatedTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     assignedEntityId BIGINT NOT NULL,
     ownerEntityId BIGINT NOT NULL,
     assignedAgentId BIGINT,
     lastStatusChangeId BIGINT,
-    priority TINYINT DEFAULT -1,
+
+    customerName VARCHAR(50) NOT NULL,
     addressId BIGINT NOT NULL,
+
+    productName VARCHAR(50) NOT NULL,
+    productDefect VARCHAR(200) NOT NULL,
+    priority TINYINT DEFAULT -1,
+
     PRIMARY KEY (id),
     FOREIGN KEY (assignedEntityId) REFERENCES Entity(id),
     FOREIGN KEY (addressId) REFERENCES Address(id)

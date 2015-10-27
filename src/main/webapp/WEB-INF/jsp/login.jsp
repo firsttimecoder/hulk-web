@@ -1,10 +1,10 @@
 <html>
     <head>
         <title>Call Management | Repairbranch</title>
-        <%@ include file="commonhead.jsp" %>
+        <%@ include file="commonHeadIncludes.jsp" %>
     </head>
     <body>
-        <div id="header"></div>
+        <%@ include file="commonHeader.jsp" %>
         <div id="page-content-wrapper">
             <div id="page-title">
                 <h3>
@@ -34,7 +34,7 @@
                                         <div class="form-input col-md-10">
                                             <div class="form-input-icon">
                                                 <i class="glyph-icon icon-envelope-o ui-state-default"></i>
-                                                <input placeholder="Username" data-type="email" data-trigger="change" data-required="true" type="login_email" name="username" id="login_email">
+                                                <input placeholder="Username" data-type="email" data-trigger="change" data-required="true" type="login_email" name="username" id="login_email" value="loginId1">
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                         <div class="form-input col-md-10">
                                             <div class="form-input-icon">
                                                 <i class="glyph-icon icon-unlock-alt ui-state-default"></i>
-                                                <input placeholder="Password" data-trigger="keyup" data-rangelength="[3,25]" type="password" name="password" id="login_pass">
+                                                <input placeholder="Password" data-trigger="keyup" data-rangelength="[3,25]" type="password" name="password" id="login_pass" value="password">
                                             </div>
                                         </div>
                                     </div>
