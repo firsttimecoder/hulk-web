@@ -248,4 +248,11 @@ public class RandomIntegrationTests {
 
         String b = "";
     }
+
+//    @Test
+    public void test19() {
+        List<CallInfo> callInfos = callInfoRepository.findByOwnerEntityIdOrAssignedEntityId(1L, 1L);
+        List<CallInfo> callInfos1 = callInfoService.getAllCallsForOwnerOrAssignedEntity(1L);
+        String b = "";
+    }
 }

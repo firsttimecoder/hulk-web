@@ -181,23 +181,29 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
                                             <tr>
                                                 <th class="text-center">Call ID</th>
                                                 <th>Customer Name</th>
+                                                <th>Customer Phone No.</th>
                                                 <th>Assigned Technician</th>
                                                 <th>Current Status</th>
+                                                <th>Product Name</th>
                                                 <!--th class="text-center">Actions</th-->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="font-bold text-left">John Clark (1234567890)</td>
-                                                <td class="font-bold text-left">Raju Srivastav (1234567890)</td>
-                                                <td class="font-bold text-left">CREATED</td>
-                                                <!--td>
-                                                    <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" class="btn medium bg-green" title="">
-                                                    <span class="button-content"><i class="glyph-icon icon-edit"></i>Edit</span>
-                                                    </a>
-                                                </td-->
-                                            </tr>
+                                            <c:forEach items="${callInfoList}" var="callInfo">
+                                                <tr>
+                                                    <td class="font-bold text-left">${callInfo.id}</td>
+                                                    <td class="font-bold text-left">${callInfo.customerName}</td>
+                                                    <td class="font-bold text-left">${callInfo.address.phoneNumber}</td>
+                                                    <td class="font-bold text-left">${callInfo.assignedAgent.displayName}</td>
+                                                    <td class="font-bold text-left">${callInfo.latestCallStatus}</td>
+                                                    <td class="font-bold text-left">${callInfo.productName}</td>
+                                                </tr>
+                                            </c:forEach>
+                                            <!--td>
+                                                <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" class="btn medium bg-green" title="">
+                                                <span class="button-content"><i class="glyph-icon icon-edit"></i>Edit</span>
+                                                </a>
+                                            </td-->
                                         </tbody>
                                     </table>
                                 </div>

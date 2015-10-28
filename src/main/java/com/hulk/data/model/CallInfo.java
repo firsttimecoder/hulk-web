@@ -2,6 +2,7 @@ package com.hulk.data.model;
 
 import com.google.common.collect.Sets;
 import com.hulk.data.pojo.CreateCallInfoDTO;
+import com.hulk.enums.CallStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
@@ -61,6 +62,11 @@ public class CallInfo extends BaseHibernateEntity {
 
     @OneToMany(mappedBy = "callInfo")
     private Set<CallStatusChange> callStatusChanges = Sets.newHashSet();
+
+    @Transient
+    public CallStatus getLatestCallStatus() {
+        return (lastStatusChange == null) ? CallStatus.CREATED : lastStatusChange.getNewStatus();
+    }
 
     public static CallInfo from(CreateCallInfoDTO createCallInfoDTO) {
         CallInfo callInfo = new CallInfo();

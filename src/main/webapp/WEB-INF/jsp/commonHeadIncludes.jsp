@@ -29,6 +29,7 @@
 <script type="text/javascript" src="/assets/js/minified/aui-production.min.js"></script>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="indianCityValues" value="<%=com.hulk.enums.IndianCity.values()%>"/>
 <c:set var="indianStateValues" value="<%=com.hulk.enums.IndianState.values()%>"/>

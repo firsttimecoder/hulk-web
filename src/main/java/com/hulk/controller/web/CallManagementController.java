@@ -2,6 +2,7 @@ package com.hulk.controller.web;
 
 import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
+import com.hulk.data.model.Entity;
 import com.hulk.data.pojo.CreateCallInfoDTO;
 import com.hulk.service.AgentService;
 import com.hulk.service.CallInfoService;
@@ -41,8 +42,12 @@ public class CallManagementController {
     @RequestMapping(method = RequestMethod.GET)
     public String doCallManagement(Model model) {
         Agent currentAgent = Utils.getCurrentUser().getAgent();
+        Entity entityForAgent = currentAgent.getAnyEntity();
+
         model.addAttribute("technicians", agentService
-                .getAllTechniciansForEntity(currentAgent.getAnyEntity().getId()));
+                .getAllTechniciansForEntity(entityForAgent.getId()));
+        model.addAttribute("callInfoList", callInfoService
+                .getAllCallsForOwnerOrAssignedEntity(entityForAgent.getId()));
 
         return "callManagement";
     }

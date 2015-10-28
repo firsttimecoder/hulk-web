@@ -23,4 +23,6 @@ public interface CallInfoRepository extends JpaRepository<CallInfo, Long> {
 
     List<CallInfo> findByAssignedAgentIdAndLastStatusChangeNullOrLastStatusChangeNewStatusNot(
             Long assignedAgentId, CallStatus currentStatus);
+
+    List<CallInfo> findByOwnerEntityIdOrAssignedEntityId(Long ownerEntityId, Long assignedEntityId);
 }

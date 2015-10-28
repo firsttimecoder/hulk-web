@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/call")
-public class CallInfoController {
+public class CallInfoRestController {
 
     @Autowired
     private CallInfoService callInfoService;

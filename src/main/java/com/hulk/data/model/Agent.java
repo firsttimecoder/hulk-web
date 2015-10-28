@@ -62,7 +62,7 @@ public class Agent extends BaseHibernateEntity {
 
     @Transient
     public String getDisplayName() {
-        return StringUtils.join(firstName, lastName);
+        return StringUtils.join(firstName, " ", lastName);
     }
 
     @Transient

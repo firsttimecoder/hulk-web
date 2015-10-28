@@ -62,4 +62,9 @@ public class CallInfoServiceImpl implements CallInfoService {
         return callStatusChangeRepository.findByCallInfoId(callInfoId,
                 new Sort(Sort.Direction.DESC, "creationTime"));
     }
+
+    @Override
+    public List<CallInfo> getAllCallsForOwnerOrAssignedEntity(Long entityId) {
+        return callInfoRepository.findByOwnerEntityIdOrAssignedEntityId(entityId, entityId);
+    }
 }
