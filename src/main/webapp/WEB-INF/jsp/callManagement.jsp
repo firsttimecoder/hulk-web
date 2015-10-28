@@ -185,7 +185,7 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
                                                 <th>Assigned Technician</th>
                                                 <th>Current Status</th>
                                                 <th>Product Name</th>
-                                                <!--th class="text-center">Actions</th-->
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -197,67 +197,17 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
                                                     <td class="font-bold text-left">${callInfo.assignedAgent.displayName}</td>
                                                     <td class="font-bold text-left">${callInfo.latestCallStatus}</td>
                                                     <td class="font-bold text-left">${callInfo.productName}</td>
+                                                    <td>
+                                                        <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" class="btn medium bg-green" title="">
+                                                            <span class="button-content"><i class="glyph-icon icon-edit"></i>Edit</span>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
-                                            <!--td>
-                                                <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" class="btn medium bg-green" title="">
-                                                <span class="button-content"><i class="glyph-icon icon-edit"></i>Edit</span>
-                                                </a>
-                                            </td-->
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <!-----Popup content---->
-                            <!--div id="light" class="white_content">
-                                <h3>Edit call</h3>
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mrg5B">
-                                            <input type="text" class="form-control" id="firstname"
-                                                placeholder="First Name">
-                                        </div>
-                                        <div class="col-sm-6 mrg5B">
-                                            <input type="text" class="form-control" id="lastname"
-                                                placeholder="Last Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mrg5B">
-                                            <input type="text" class="form-control" id="phone"
-                                                placeholder="Phone No.">
-                                        </div>
-                                        <div class="col-sm-6 mrg5B">
-                                            <input type="text" class="form-control" id="email"
-                                                placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mrg5B">
-                                            <select class="form-control">
-                                                <option>Dropdown</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6 mrg5B">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-10">
-                                            <a title="" class="btn medium primary-bg" href="#">
-                                            <span class="button-content">Save</span>
-                                            </a>
-                                            <a title="" class="btn medium primary-bg" href="#">
-                                            <span class="button-content">Cancel</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </form>
-                                <a class="popup-close" href ="javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
-                            </div-->
                         </div>
                     </div>
                 </div>
