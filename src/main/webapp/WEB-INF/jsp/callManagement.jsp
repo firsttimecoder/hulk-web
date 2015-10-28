@@ -20,7 +20,7 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
             phoneNumber:    $("#addCallDiv").find("#phoneNumber").val()
         },
         productName:        $("#addCallDiv").find("#productName").val(),
-        productDefect:        $("#addCallDiv").find("#productDefect").val()
+        productDefect:      $("#addCallDiv").find("#productDefect").val()
     };
 
     $.ajax({
@@ -29,6 +29,7 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
         contentType: "application/json",
         data: JSON.stringify(createCallInfoDTO),
         success: function(result) {
+            $("#addCallDiv").find("#assignedTechnician")[0].selectedIndex = 0;
             alert("Success! Please reload page to view latest details.");
         },
         error: function(xhr){
@@ -136,7 +137,7 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
                                             <div class="form-group">
                                                 <div class="col-sm-6 mrg5B">
                                                     <select class="form-control" id="assignedTechnician">
-                                                        <option selected disabled>Assigned Technician</option>
+                                                        <option value=-1>Assigned Technician</option>
                                                         <c:forEach items="${technicians}" var="technician">
                                                             <option value="${technician.id}">${technician.fullDisplayInfo}</option>
                                                         </c:forEach>
