@@ -31,11 +31,7 @@ public class AgentServiceImpl implements AgentService{
     @Override
     public Agent createAgent(CreateAgentDTO createAgentDTO) {
         Agent agent = Agent.from(createAgentDTO);
-
-        Agent savedAgent = agentRepository.save(agent);
-        savedAgent.setHashedPassword("");
-
-        return savedAgent;
+        return agentRepository.save(agent);
     }
 
     @Override

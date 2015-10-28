@@ -77,9 +77,7 @@ public class Agent extends BaseHibernateEntity {
         }
 
         Agent agent = new Agent();
-
         BeanUtils.copyProperties(createAgentDTO, agent);
-        agent.setAddress(Address.from(createAgentDTO.getAddress()));
 
         agent.setHashedPassword(new BCryptPasswordEncoder().encode(createAgentDTO.getPlainTextPassword()));
 

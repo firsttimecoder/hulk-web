@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.hulk.data.model.Address;
 import com.hulk.enums.AgentRole;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
@@ -51,5 +52,5 @@ public class CreateAgentDTO {
 
     @NotNull
     @Valid
-    private AddressDTO address;
+    private Address address;
 }

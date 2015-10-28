@@ -1,5 +1,6 @@
 package com.hulk.data.pojo;
 
+import com.hulk.data.model.Address;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -19,7 +20,7 @@ public class CreateCallInfoDTO {
 
     @NotNull
     @Valid
-    private AddressDTO address;
+    private Address address;
 
     @NotBlank
     private String productName;

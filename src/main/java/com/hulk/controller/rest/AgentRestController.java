@@ -25,9 +25,9 @@ public class AgentRestController {
     private AgentService agentService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public @ResponseBody Agent createAgent(@RequestBody @Valid CreateAgentDTO createAgentDTO) {
+    public @ResponseBody AgentDTO createAgent(@RequestBody @Valid CreateAgentDTO createAgentDTO) {
         Agent agent = agentService.createAgent(createAgentDTO);
-        return agent;
+        return AgentDTO.from(agent);
     }
 
     @RequestMapping(value = "/getAssignedCalls", method = RequestMethod.GET)

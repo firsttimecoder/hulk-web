@@ -64,9 +64,7 @@ public class CallInfo extends BaseHibernateEntity {
 
     public static CallInfo from(CreateCallInfoDTO createCallInfoDTO) {
         CallInfo callInfo = new CallInfo();
-
         BeanUtils.copyProperties(createCallInfoDTO, callInfo);
-        callInfo.setAddress(Address.from(createCallInfoDTO.getAddress()));
 
         if (createCallInfoDTO.getAssignedAgentId() != null
                 && createCallInfoDTO.getAssignedAgentId() > 0) {
