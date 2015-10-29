@@ -4,10 +4,14 @@
         <%@ include file="commonHeadIncludes.jsp" %>
 
 <script>
+
+var callInfoIdForPopup = -1;
+
 $(document).ready(function(){
 
 $("#addCallDiv").find("#saveAnchor").click(function() {
     var createCallInfoDTO = {
+        id:                 callInfoIdForPopup,
         assignedAgentId:    $("#addCallDiv").find("#assignedTechnician").val(),
         customerName:       $("#addCallDiv").find("#customerName").val(),
         address: {
@@ -24,31 +28,38 @@ $("#addCallDiv").find("#saveAnchor").click(function() {
     };
 
     $.ajax({
-        url: "/callManagement/createCall",
+        url: "/call/createOrUpdateCall",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(createCallInfoDTO),
         success: function(result) {
-            $("#addCallDiv").find("#assignedTechnician")[0].selectedIndex = 0;
-            $("#addCallDiv").find("input").val('');
-
             alert("Success! Please reload page to view latest details.");
+            closePopup();
         },
         error: function(xhr) {
             showError(xhr);
         }
     });
+    return true;
 });
 
-}); // end document on ready function.
+$(document).keyup(function(e) {
+    if (e.keyCode == 27) {  // on escape key.
+        closePopup();
+    }
+});
+
+}); // end document on-ready function.
 
 function showAddEditPopup(callInfoId) {
     document.getElementById('light').style.display='block';
-    // document.getElementById('fade').style.display='block';
+    callInfoIdForPopup = callInfoId;
 
     if (callInfoId < 0) {
+        $("#popupHeader").html("Add Call");
         $("#addCallDiv").find("input").val('');
     } else {
+        $("#popupHeader").html("Edit Call: Id #" + callInfoId);
         $.ajax({
             url: "/call/getDetails?callInfoId=" + callInfoId,
             method: "GET",
@@ -74,6 +85,7 @@ function showAddEditPopup(callInfoId) {
 
         });
     }
+    return true;
 }
 
 function showError(xhr) {
@@ -82,7 +94,10 @@ function showError(xhr) {
 
 function closePopup() {
     document.getElementById('light').style.display='none';
-    // document.getElementById('fade').style.display='none';
+
+    $("#addCallDiv").find("#assignedTechnician")[0].selectedIndex = 0;
+    $("#addCallDiv").find("input").val('');
+    return true;
 }
 
 </script>
@@ -105,7 +120,7 @@ function closePopup() {
                                 <ul>
                                     <li>
                                         <div class="col-md-12">
-                                            <a href = "javascript:void(0)" onclick = 'showAddEditPopup(-1);' class="tile-button btn clearfix bg-white" title="">
+                                            <a href = "javascript:void(0)" onclick = 'return showAddEditPopup(-1);' class="tile-button btn clearfix bg-white" title="">
                                                 <div class="tile-header pad10A font-size-13 popover-title" style="background:#0664CA;">
                                                     Add
                                                 </div>
@@ -157,7 +172,7 @@ function closePopup() {
                                                     <td class="font-bold text-left">${callInfo.latestCallStatus}</td>
                                                     <td class="font-bold text-left">${callInfo.productName}</td>
                                                     <td>
-                                                        <a href = "javascript:void(0)" onclick = 'showAddEditPopup(${callInfo.id});' class="btn medium bg-green" title="">
+                                                        <a href = "javascript:void(0)" onclick = 'return showAddEditPopup(${callInfo.id});' class="btn medium bg-green" title="">
                                                             <span class="button-content"><i class="glyph-icon icon-edit"></i>Edit</span>
                                                         </a>
                                                     </td>
@@ -175,12 +190,12 @@ function closePopup() {
         </div>
         <div id="footer"></div>
         <div class="white_content" id="light">
-            <h3>Add/Edit Call</h3>
+            <h3 id="popupHeader">Blah</h3>
             <form class="form-horizontal" role="form" id="addCallDiv">
                 <div class="form-group">
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="customerName"
-                            placeholder="Customer Name">
+                            placeholder="*Customer Name">
                     </div>
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="phoneNumber"
@@ -190,7 +205,7 @@ function closePopup() {
                 <div class="form-group">
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="addressFirstLine"
-                            placeholder="Address: First line">
+                            placeholder="*Address: First line">
                     </div>
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="addressSecondLine"
@@ -204,7 +219,7 @@ function closePopup() {
                     </div>
                     <div class="col-sm-6 mrg5B">
                         <select class="form-control" id="city">
-                            <option selected disabled>City</option>
+                            <option selected disabled>*City</option>
                             <c:forEach items="${indianCityValues}" var="city">
                                 <option value="${city}">${city}</option>
                             </c:forEach>
@@ -214,11 +229,11 @@ function closePopup() {
                 <div class="form-group">
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="pincode"
-                            placeholder="Address: Pincode">
+                            placeholder="*Address: Pincode">
                     </div>
                     <div class="col-sm-6 mrg5B">
                         <select class="form-control" id="state">
-                            <option selected disabled>State</option>
+                            <option selected disabled>*State</option>
                             <c:forEach items="${indianStateValues}" var="state">
                                 <option value="${state}">${state}</option>
                             </c:forEach>
@@ -228,11 +243,11 @@ function closePopup() {
                 <div class="form-group">
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="productName"
-                            placeholder="Product: Name">
+                            placeholder="*Product: Name">
                     </div>
                     <div class="col-sm-6 mrg5B">
                         <input type="text" class="form-control" id="productDefect"
-                            placeholder="Product: Defect">
+                            placeholder="*Product: Defect">
                     </div>
                 </div>
 
@@ -259,7 +274,7 @@ function closePopup() {
                     </div>
                 </div>
             </form>
-            <a class="popup-close" href ="javascript:void(0)" onclick = 'closePopup();'>Close</a>
+            <a class="popup-close" href ="javascript:void(0)" onclick = 'return closePopup();'>Close</a>
         </div>
     </body>
 </html>

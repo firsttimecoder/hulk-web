@@ -4,13 +4,17 @@ import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
 import com.hulk.data.model.CallStatusChange;
 import com.hulk.data.pojo.CallInfoDTO;
+import com.hulk.data.pojo.CreateOrUpdateCallInfoDTO;
 import com.hulk.enums.CallStatus;
 import com.hulk.service.CallInfoService;
+import com.hulk.util.Constants;
 import com.hulk.util.Utils;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by vijayvar on 10/20/15.
@@ -46,5 +50,14 @@ public class CallInfoRestController {
 
         CallInfo callInfo = callInfoService.getCallForEntity(callInfoId, currentAgent.getAnyEntity().getId());
         return CallInfoDTO.from(callInfo);
+    }
+
+    @RequestMapping(value = "/createOrUpdateCall", method = RequestMethod.POST)
+    public @ResponseBody String createOrUpdateCall(
+            @RequestBody @Valid CreateOrUpdateCallInfoDTO createOrUpdateCallInfoDTO) {
+        CallInfo callInfo = CallInfo.from(createOrUpdateCallInfoDTO);
+        callInfoService.createCall(callInfo);
+
+        return Constants.DEFAULT_SUCCESS_MSG;
     }
 }

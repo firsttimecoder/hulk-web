@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by vijayvar on 10/10/15.
@@ -43,6 +44,7 @@ public class Address extends BaseHibernateEntity {
 
     @NotNull
     @Length(min = 6, max = 6)
+    @Pattern(regexp = "[\\d]+")
     @Column(length = 6, nullable = false)
     private String pincode;
 

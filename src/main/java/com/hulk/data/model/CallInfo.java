@@ -1,8 +1,9 @@
 package com.hulk.data.model;
 
 import com.google.common.collect.Sets;
-import com.hulk.data.pojo.CreateCallInfoDTO;
+import com.hulk.data.pojo.CreateOrUpdateCallInfoDTO;
 import com.hulk.enums.CallStatus;
+import com.hulk.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
@@ -68,14 +69,17 @@ public class CallInfo extends BaseHibernateEntity {
         return (lastStatusChange == null) ? CallStatus.CREATED : lastStatusChange.getNewStatus();
     }
 
-    public static CallInfo from(CreateCallInfoDTO createCallInfoDTO) {
+    public static CallInfo from(CreateOrUpdateCallInfoDTO createOrUpdateCallInfoDTO) {
         CallInfo callInfo = new CallInfo();
-        BeanUtils.copyProperties(createCallInfoDTO, callInfo, "id");
+        BeanUtils.copyProperties(createOrUpdateCallInfoDTO, callInfo, "id");
 
-        if (createCallInfoDTO.getAssignedAgentId() != null
-                && createCallInfoDTO.getAssignedAgentId() > 0) {
+        if (Utils.isValidLongId(createOrUpdateCallInfoDTO.getId())) {
+            callInfo.setId(createOrUpdateCallInfoDTO.getId());
+        }
+
+        if (Utils.isValidLongId(createOrUpdateCallInfoDTO.getAssignedAgentId())) {
             Agent agent = new Agent();
-            agent.setId(createCallInfoDTO.getAssignedAgentId());
+            agent.setId(createOrUpdateCallInfoDTO.getAssignedAgentId());
             callInfo.setAssignedAgent(agent);
         }
 

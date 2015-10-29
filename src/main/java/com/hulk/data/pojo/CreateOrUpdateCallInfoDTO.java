@@ -11,7 +11,9 @@ import javax.validation.constraints.NotNull;
  * Created by vijayvar on 10/20/15.
  */
 @Data
-public class CreateCallInfoDTO {
+public class CreateOrUpdateCallInfoDTO {
+
+    private Long id;
 
     private Long assignedAgentId;
 

@@ -22,4 +22,8 @@ public class Utils {
     public static Long getCurrentAgentId() {
         return getCurrentUser().getAgent().getId();
     }
+
+    public static boolean isValidLongId(Long id) {
+        return id != null && id > 0;
+    }
 }
