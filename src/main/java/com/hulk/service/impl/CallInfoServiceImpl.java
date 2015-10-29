@@ -67,4 +67,11 @@ public class CallInfoServiceImpl implements CallInfoService {
     public List<CallInfo> getAllCallsForOwnerOrAssignedEntity(Long entityId) {
         return callInfoRepository.findByOwnerEntityIdOrAssignedEntityId(entityId, entityId);
     }
+
+    @Override
+    public CallInfo getCallForEntity(Long callInfoId, Long entityId) {
+        // TODO: use entityId
+
+        return callInfoRepository.findOne(callInfoId);
+    }
 }

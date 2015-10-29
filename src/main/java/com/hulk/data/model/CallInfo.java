@@ -70,7 +70,7 @@ public class CallInfo extends BaseHibernateEntity {
 
     public static CallInfo from(CreateCallInfoDTO createCallInfoDTO) {
         CallInfo callInfo = new CallInfo();
-        BeanUtils.copyProperties(createCallInfoDTO, callInfo);
+        BeanUtils.copyProperties(createCallInfoDTO, callInfo, "id");
 
         if (createCallInfoDTO.getAssignedAgentId() != null
                 && createCallInfoDTO.getAssignedAgentId() > 0) {

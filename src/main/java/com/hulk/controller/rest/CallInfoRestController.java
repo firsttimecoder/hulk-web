@@ -3,6 +3,7 @@ package com.hulk.controller.rest;
 import com.hulk.data.model.Agent;
 import com.hulk.data.model.CallInfo;
 import com.hulk.data.model.CallStatusChange;
+import com.hulk.data.pojo.CallInfoDTO;
 import com.hulk.enums.CallStatus;
 import com.hulk.service.CallInfoService;
 import com.hulk.util.Utils;
@@ -37,5 +38,13 @@ public class CallInfoRestController {
         callStatusChange.setNewStatus(newStatus);
 
         callInfoService.changeCallStatus(callStatusChange);
+    }
+
+    @RequestMapping(value = "/getDetails", method = RequestMethod.GET)
+    public @ResponseBody CallInfoDTO getDetails(@RequestParam @NonNull Long callInfoId) {
+        Agent currentAgent = Utils.getCurrentUser().getAgent();
+
+        CallInfo callInfo = callInfoService.getCallForEntity(callInfoId, currentAgent.getAnyEntity().getId());
+        return CallInfoDTO.from(callInfo);
     }
 }

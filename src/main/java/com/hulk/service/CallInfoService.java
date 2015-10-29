@@ -19,4 +19,6 @@ public interface CallInfoService {
     List<CallStatusChange> getAllCallStatusChanges(Long callInfoId);
 
     List<CallInfo> getAllCallsForOwnerOrAssignedEntity(Long entityId);
+
+    CallInfo getCallForEntity(Long callInfoId, Long entityId);
 }
